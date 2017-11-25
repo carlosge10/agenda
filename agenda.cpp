@@ -137,7 +137,18 @@ int main ()
                                 p[i] = contacto;
                     break;
                 case 'B':
-
+                    string busqueda;
+                    cin>>busqueda;
+                    for (int i = 0; i < tam; ++i)
+                    {
+                        for (int j = 0; j < p[i].nombre.length(); ++j)
+                        {
+                            for (int k = 0; k < busqueda.length(); ++k)
+                            {
+                                /* code */
+                            }
+                        }
+                    }
                     break;
 
                 case 'C':
