@@ -156,10 +156,10 @@ int main ()
                         cin>> pos;
                         if(pos>ini)
                             cout<<"Elemento vacio. intente otra vez:";
-                        
-
+                        if(pos<1||pos>tam)
+                            cout<<"Elemento fuera de rango. Intente otra vez:";
+                        p[pos] = new Persona;
                     }while(pos>tam || pos<1);
-
                     break;
 
                 case 'M':
