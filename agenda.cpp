@@ -131,21 +131,25 @@ int main ()
                     break;
 
                 case 'D':
-                /*
+                    
                     int opc;
-
                     cout << "Escribe el número en la lista del contacto que quieres que te de informacion";
-                    cin >> opc;
-                    opc=opc-1;
-                    contacto[opc].isInitialized;
-                    cout <<"Calle: " << contactod[opc].calle<<endl;
-                    cout <<"Ciudad: " << contactod[opc].ciudad<<endl;
-                    cout <<"Colonia: " << contactod[opc].colonia<<endl;
-                    cout <<"Estado: " << contactod[opc].estado<<endl;
-                    cout <<"Interior: " << contactod[opc].interior<<endl;
-                    cout <<"Numero: " << contactod[opc].numero<<endl;
-                    contactot[opc].isInitialized;
-                    cout<<"Su numero es"<< contactot[opc].line<< contactot[opc].clave_cd<< numero <<endl*/
+                    do{
+                        cin >> opc;
+                        opc=opc-1;
+                        if(contacto[opc].isInitialized){
+                            cout <<"Calle   : " << p[opc].calle<<endl;
+                            cout <<"Ciudad  : " << p[opc].ciudad<<endl;
+                            cout <<"Colonia : " << p[opc].colonia<<endl;
+                            cout <<"Estado  : " << p[opc].estado<<endl;
+                            cout <<"Interior: " << p[opc].interior<<endl;
+                            cout <<"Numero  : " << p[opc].numero<<endl;
+                            cout<<"Indice   : "<< p[opc].line<< p[opc].clave_cd<< numero <<endl
+                        }
+                        else{
+                            cout<<"Persona no inicializada. Intenta otra vez:"<<endl;
+                        }
+                    }
                 break;
 
                 case 'E':
