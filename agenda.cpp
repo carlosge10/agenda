@@ -45,6 +45,7 @@ void menu(){
     cout << "|-C-|: Editar contacto " << endl;
     cout << "|-D-|: Informacion de contacto " << endl;
     cout << "|-E-|: Eliminar un contacto " << endl;
+    cout << "|-I-|: Anadir espacio en la agenda " << endl;
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
@@ -60,11 +61,11 @@ void menu(){
 
 int main ()
 {
-    int ini=0;
-    tam=25;
+    int max_size=0;
+    tam=10;
     int numero;
     char op;
-    p = new Personas[tam];
+    p = new Personas[25];
 
     menu();
 
@@ -77,6 +78,11 @@ int main ()
         switch (op)
         {
                 case 'A':
+                    if (!space_in_agenda()) {
+                        cout < "No hay espacio para agregar otra persona" << endl;
+                        break;
+                    }
+                    // Hay espacio para agregar persona
                     Persona contacto;
                     cout << "-----Ingrese los datos requeridos para agregar un contacto: ------" << endl;
                     cout << "Nombre(s): ";
@@ -129,10 +135,10 @@ int main ()
                             cout << "No valido";
 
                     }
-                    if(ini == tam)
+                    if(max_size == tam)
                         cout<<"No se puede inserar, ya esta llena la lista"<<endl ;
                     else
-                        for(int i = 0; i < ini; i++)
+                        for(int i = 0; i < max_size; i++)
                             if (!p[i].isInitialized)
                                 p[i] = contacto;
                     break;
@@ -178,12 +184,16 @@ int main ()
                         p[pos] = new Persona;
                     }while(pos>tam || pos<1);
                     break;
-
+                case 'I':
+                    cout << "Cual sera el nuevo tamano de la agenda: ";
+                    cin>>ini;
+                    // TODO 
+                    break;
                 case 'M':
                     for (int i = 0; i < tam; ++i)
                     {
                         if(p[i].isInitialized){
-                            cout<<"Posicion: "<<i<<endl;
+                            cout<<"Posicion: "<<(i+1)<<endl;
                             cout<<"Nombre  : "<<p[i-1].nombre<<endl;
                             cout<<"APaterno: "<<p[i-1].apellido_p<<endl;
                             cout<<"AMaterno: "<<p[i-1].apellido_m[0]<<endl;
@@ -191,7 +201,7 @@ int main ()
                     }
                     break;
                 case 'N':
-                    cout <<"Hay "<<ini<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
+                    cout <<"Hay "<<max_size<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
                     break;
 
                 case 'S':
@@ -199,28 +209,7 @@ int main ()
                     break;
 
                 case '?':
-                     cout << "~~~~~~~~~~~AGENDA DE CONTACTOS~~~~~~~~~~~" << endl;
-        cout << "Autores: Paulina Castellanos, Edson González" << endl;
-        cout << endl;
-        cout << "Instrucciones: " << endl;
-        cout << "Presione la tecla correspondiente al comando deseado. " << endl;
-        cout << endl;
-        cout << "|-A-|: Agregar un contacto " << endl;
-        cout << "|-B-|: Buscar un contacto " << endl;
-        cout << "|-C-|: Editar contacto " << endl;
-        cout << "|-D-|: Informacion de contacto " << endl;
-        cout << "|-E-|: Eliminar un contacto " << endl;
-        cout << endl;
-        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-        cout << endl;
-        cout << "|-M-|: Mostrar  lista de contactos " << endl;
-        cout << "|-N-|: Mostrar cantidad de contactos " << endl;
-        cout << endl;
-        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-        cout << endl;
-        cout << "|-S-|: Finalizar programa " << endl;
-        cout << "|-V-|: Mostrar version del programa " << endl;
-        cout << "|-?-|: Ayuda " << endl << endl;
+                    menu();
                     break;
 
 
