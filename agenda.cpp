@@ -167,17 +167,25 @@ int main ()
                     do{
 
                         cin>> pos;
-                        if(pos>ini)
+                        if(p[pos-1].isInitialized)
                             cout<<"Elemento vacio. intente otra vez:";
-                        
-
+                        if(pos<1||pos>tam)
+                            cout<<"Elemento fuera de rango. Intente otra vez:";
+                        p[pos] = new Persona;
                     }while(pos>tam || pos<1);
-
                     break;
 
                 case 'M':
+                    for (int i = 0; i < tam; ++i)
+                    {
+                        if(p[i].isInitialized){
+                            cout<<"Posicion: "<<i<<endl;
+                            cout<<"Nombre  : "<<p[i-1].nombre<<endl;
+                            cout<<"APaterno: "<<p[i-1].apellido_p<<endl;
+                            cout<<"AMaterno: "<<p[i-1].apellido_m[0]<<endl;
+                        }
+                    }
                     break;
-
                 case 'N':
                     cout <<"Hay "<<ini<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
                     break;
