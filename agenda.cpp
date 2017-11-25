@@ -7,7 +7,7 @@
 using namespace std;
 Domicilio contactod;
 Telefono contactot;
-
+int tam;
 
 
 Domicilio AD[10];
@@ -21,6 +21,17 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
+
+bool space_in_agenda() {
+    bool space = false;
+    for(int i = 0; i < tam; i++) {
+        if (!p[i].isInitialized) {
+            space = true;
+            break;
+        }
+    }
+    return space;
+}
 
 void menu(){
     cout << "~~~~~~~~~~~AGENDA DE CONTACTOS~~~~~~~~~~~" << endl;
@@ -50,7 +61,7 @@ void menu(){
 int main ()
 {
     int ini=0;
-    int tam=10;
+    tam=25;
     int numero;
     char op;
     p = new Personas[tam];
@@ -121,7 +132,9 @@ int main ()
                     if(ini == tam)
                         cout<<"No se puede inserar, ya esta llena la lista"<<endl ;
                     else
-                        p[ini++] = contacto;
+                        for(int i = 0; i < ini; i++)
+                            if (!p[i].isInitialized)
+                                p[i] = contacto;
                     break;
                 case 'B':
 
