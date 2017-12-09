@@ -5,13 +5,11 @@
 #include "types.h"
 
 using namespace std;
-Domicilio contactod;
-Telefono contactot;
 int tam;
 
 
 Domicilio AD[10];
-Personas *p;
+Persona *p;
 /*
 AD[0].calle
 AD[1].numero
@@ -22,10 +20,19 @@ AD[5].colonia
 AD[6].estado
 */
 
-bool space_in_agenda() {
+bool match(std::string word, std::string pattern) {
+    for(int i = 0; i < word.length(); i++) {
+        if (toupper(word[i]) == toupper(pattern[i]) && i + 1 == pattern.length())
+            return true;
+    }
+    return false;
+}
+
+bool space_in_agenda(int *q) {
     bool space = false;
     for(int i = 0; i < tam; i++) {
         if (!p[i].isInitialized) {
+            (*q)++;
             space = true;
             break;
         }
@@ -33,7 +40,14 @@ bool space_in_agenda() {
     return space;
 }
 
-void menu(){
+void print_persona(Persona p, int i) {
+    cout<<"Posicion: "<<(i+1)<<endl;
+    cout<<"Nombre  : "<<p.nombre<<endl;
+    cout<<"APaterno: "<<p.apellido_p<<endl;
+    cout<<"AMaterno: "<<p.apellido_m[0]<<endl;
+}
+
+void menu() {
     cout << "~~~~~~~~~~~AGENDA DE CONTACTOS~~~~~~~~~~~" << endl;
     cout << "Autores: Paulina Castellanos, Edson González" << endl;
     cout << endl;
@@ -65,7 +79,7 @@ int main ()
     tam=10;
     int numero;
     char op;
-    p = new Personas[25];
+    p = new Persona[25];
 
     menu();
 
@@ -77,9 +91,10 @@ int main ()
         op = toupper(op);
         switch (op)
         {
-                case 'A':
-                    if (!space_in_agenda()) {
-                        cout < "No hay espacio para agregar otra persona" << endl;
+                case 'A':{
+                    int tam_agenda;
+                    if (!space_in_agenda(&tam_agenda)) {
+                        cout << "No hay espacio para agregar otra persona" << endl;
                         break;
                     }
                     // Hay espacio para agregar persona
@@ -97,19 +112,19 @@ int main ()
                     if (yn == 'Y')
                     {
                         cout << "Calle: ";
-                        cin >> contactod.calle;
+                        cin >> contacto.dom.calle;
                         cout << "Numero: " << endl;
-                        cin >> contactod.numero;
+                        cin >> contacto.dom.numero;
                         cout << "Interior: " << endl;
-                        cin >> contactod.interior;
+                        cin >> contacto.dom.interior;
                         cout << "Colonia: " << endl;
-                        cin >> contactod.colonia;
+                        cin >> contacto.dom.colonia;
                         cout << "Codigo postal: " << endl;
-                        cin >> contactod.codigo_postal;
+                        cin >> contacto.dom.codigo_postal;
                         cout << "Ciudad: " << endl;
-                        cin >> contactod.ciudad;
+                        cin >> contacto.dom.ciudad;
                         cout << "Estado: " << endl;
-                        cin >> contactod.estado;
+                        cin >> contacto.dom.estado;
                     }
                     cout << "Desea capturar el telefono de " << contacto.nombre << " ahora?(Y/N)" << endl;
                     cin >> yn;
@@ -123,98 +138,99 @@ int main ()
                         linea= toupper(linea);
                         if (linea == 'C' || linea == 'H' || linea == 'W'){
                             cout << "Linea local: " << endl;
-                            cin >> contactot.local;
+                            cin >> contacto.tel.local;
                             cout << "Clave de la ciudad: " <<endl;
-                            cin >> contactot.clave_cd;
-                            cout << "Dame el numero "<<endl;
-                            cin >> numero;
+                            cin >> contacto.tel.clave_cd;
                             cout << "Numero guardado"<<endl;
-
                         }
                         else
                             cout << "No valido";
-
                     }
-                    if(max_size == tam)
-                        cout<<"No se puede inserar, ya esta llena la lista"<<endl ;
-                    else
-                        for(int i = 0; i < max_size; i++)
-                            if (!p[i].isInitialized)
-                                p[i] = contacto;
-                    break;
-                case 'B':
-                    string busqueda;
+                    contacto.isInitialized = true;
+                    for(int i = 0; i < tam; i++)
+                        if (!p[i].isInitialized) {
+                            p[i] = contacto;
+                            break;
+                        }
+                    break;}
+                case 'B': {
+                    std::string busqueda;
                     cin>>busqueda;
                     for (int i = 0; i < tam; ++i)
                     {
-                        for (int j = 0; j < p[i].nombre.length(); ++j)
-                        {
-                            for (int k = 0; k < busqueda.length(); ++k)
-                            {
-                                /* code */
-                            }
+                        if (p[i].isInitialized) {
+                            if (match(p[i].nombre, busqueda) || match(p[i].apellido_p, busqueda) || match(p[i].apellido_m, busqueda))
+                                print_persona(p[i], i);
                         }
                     }
                     break;
-
-                case 'C':
+}
+                case 'C': {
                     break;
+                }
 
-                case 'D':
-                    
+                case 'D': {
+
                     int opc;
                     cout << "Escribe el número en la lista del contacto que quieres que te de informacion";
                     do{
                         cin >> opc;
                         opc=opc-1;
-                        if(contacto[opc].isInitialized){
-                            cout <<"Calle   : " << p[opc].calle<<endl;
-                            cout <<"Ciudad  : " << p[opc].ciudad<<endl;
-                            cout <<"Colonia : " << p[opc].colonia<<endl;
-                            cout <<"Estado  : " << p[opc].estado<<endl;
-                            cout <<"Interior: " << p[opc].interior<<endl;
-                            cout <<"Numero  : " << p[opc].numero<<endl;
-                            cout<<"Indice   : "<< p[opc].line<< p[opc].clave_cd<< numero <<endl
+                        if(p[opc].isInitialized){
+                            cout <<"Calle   : " << p[opc].dom.calle<<endl;
+                            cout <<"Ciudad  : " << p[opc].dom.ciudad<<endl;
+                            cout <<"Colonia : " << p[opc].dom.colonia<<endl;
+                            cout <<"Estado  : " << p[opc].dom.estado<<endl;
+                            cout <<"Interior: " << p[opc].dom.interior<<endl;
+                            cout <<"Tipo de linea  : " << p[opc].tel.line<<endl;
+                            cout <<"Linea local: " << p[opc].tel.local<<endl;
+                            cout <<"Clave de la ciudad: " << p[opc].tel.clave_cd<<endl;
                         }
                         else{
                             cout<<"Persona no inicializada. Intenta otra vez:"<<endl;
                         }
-                    }
+                    }while(!p[opc].isInitialized);
                 break;
-
+}
                 case 'E':
                     int pos;
                     cout<<"Dime la posicion del contacto a eliminar: "<<endl;
                     do{
-
                         cin>> pos;
-                        if(p[pos-1].isInitialized)
+                        if(!p[pos-1].isInitialized)
                             cout<<"Elemento vacio. intente otra vez:";
-                        if(pos<1||pos>tam)
+                        else if(pos<1||pos>tam)
                             cout<<"Elemento fuera de rango. Intente otra vez:";
-                        p[pos] = new Persona;
+                        Persona persona;
+                        p[pos-1] = persona;
                     }while(pos>tam || pos<1);
                     break;
                 case 'I':
                     cout << "Cual sera el nuevo tamano de la agenda: ";
-                    cin>>ini;
-                    // TODO 
+                    int tamano;
+                    cin>>tamano;
+                    if (tamano < tam)
+                        cout << "Ya esta asignado este tamano.";
+                    else if (tamano < 26) {
+                        cout << "La agenda crecio a " << tamano << "." << endl;
+                        tam = tamano;
+                    }
+                    else
+                        cout << "El tamano maximo es de 25";
                     break;
                 case 'M':
                     for (int i = 0; i < tam; ++i)
                     {
                         if(p[i].isInitialized){
-                            cout<<"Posicion: "<<(i+1)<<endl;
-                            cout<<"Nombre  : "<<p[i-1].nombre<<endl;
-                            cout<<"APaterno: "<<p[i-1].apellido_p<<endl;
-                            cout<<"AMaterno: "<<p[i-1].apellido_m[0]<<endl;
+                            print_persona(p[i], i);
                         }
                     }
                     break;
                 case 'N':
-                    cout <<"Hay "<<max_size<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
+                    int tamano_agenda;
+                    space_in_agenda(&tamano_agenda);
+                    cout <<"Hay "<<tamano_agenda<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
                     break;
-
                 case 'S':
                     cout<<"Gracias por utilizar la agenda de contactos."<< endl;
                     break;
@@ -225,8 +241,8 @@ int main ()
 
 
                 case 'V':
+                    cout << "Version 1.0" << endl;
                     break;
-
                 default:
                     cout << "Opcion no valida" << endl;
                     break;
