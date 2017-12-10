@@ -4,6 +4,7 @@
 #include <string>
 #include "types.h"
 #include <conio.h>
+#include <math.h>
 
 using namespace std;
 int tam;
