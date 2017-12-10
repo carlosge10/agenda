@@ -165,8 +165,25 @@ int main ()
                         }
                     }
                     break;
-}
+                }
                 case 'C': {
+                    int cambio;
+                    cout<<"Que numero de contacto quieres cambiar?";
+                    cin>>cambio;
+                    string ndato;
+                    getline(cin, ndato);
+                    cout<<"Nuevo nombre:";
+                    getline(cin, ndato);
+                    if(!ndato.equals("")){
+                        p[cambio].nombre = ndato;
+                    }
+                    //repetir para todos los datos
+                    cout<<"Nuevo x:";
+                    getline(cin, ndato);
+                    if(!ndato.equals("")){
+                        p[cambio].x = ndato;
+                    }
+
                     break;
                 }
 
