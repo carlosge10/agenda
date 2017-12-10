@@ -6,6 +6,8 @@
 #include <conio.h>
 #include <math.h>
 #include <fstream>
+#include <sstream>
+
 
 using namespace std;
 int tam;
@@ -138,9 +140,23 @@ void guardarContactos(Persona* p){
   ofstream agenda;
   agenda.open ("agenda.txt", ios::trunc);
 
+  string s = "CEDI TXT DATA FORMAT v0.1";
+  int slen = s.length();
+  for (int i = 0; i < 32; ++i)
+  {
+    if(i<slen){
+        agenda<<s[i];
+    }
+    else{
+        agenda<<" ";
+    }
+  }
+  agenda<<endl;
+
   for (int i = 0; i < tam; ++i)
   {
-    agenda<<p[i].nombre<<","<<p[i].apellido_p<<","<<endl;
+    agenda<<"PERSONA:\t"<<p[i].nombre<<"\t"<<p[i].apellido_p<<endl;
+    agenda<<"TELEFONO:\t";
   }
   agenda.close();
 
@@ -152,6 +168,14 @@ void kargarContactos(){
 
     string s;
     while(getline(cin, s)){
+
+        string datos[16];
+        int i = 0;
+        stringstream ssin(s);
+        while (ssin.good() && i < 16){
+            ssin >> datos[i];
+            ++i;
+        }
 
     }
     agenda.close();
