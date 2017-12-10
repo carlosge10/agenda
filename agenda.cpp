@@ -138,7 +138,7 @@ void menu() {
 
 void guardarContactos(Persona* p){
   ofstream agenda;
-  agenda.open ("agenda.txt", ios::trunc);
+  agenda.open ("AGENDA.TDAT", ios::trunc);
 
   string s = "CEDI TXT DATA FORMAT v0.1";
   int slen = s.length();
@@ -162,24 +162,43 @@ void guardarContactos(Persona* p){
 
 }
 
-void kargarContactos(){
+void kargarContactos(Persona* p){
     ifstream agenda;
-    agenda.open("agenda.txt");
+    agenda.open("AGENDA.TDAT");
 
     string s;
-    while(getline(cin, s)){
+    string t;
+    //lee titulo
+    agenda>>s;
+    int i=0;
+    //lee persona
+    while(getline(agenda, s)){
+        istringstream tokenizer(s);
+        getline(tokenizer, t, '\t'); // then get the tokens from it
+        getline(tokenizer, p[i].nombre, '\t');
+        getline(tokenizer, p[i].apellido_p, '\t');
+        getline(tokenizer, p[i].apellido_m, '\t');
 
-        string datos[16];
-        int i = 0;
-        stringstream ssin(s);
-        while (ssin.good() && i < 16){
-            ssin >> datos[i];
-            ++i;
-        }
+        //lee domicilio
+        getline(agenda, s))
+        istringstream tokenizer(s);
+        getline(tokenizer, t, '\t'); // then get the tokens from it
+        getline(tokenizer, p[i].dom.calle, '\t');
+        getline(tokenizer, p[i].dom.numero, '\t');
+        getline(tokenizer, p[i].dom.colonia, '\t');
+        getline(tokenizer, p[i].dom.codigo_postal, '\t');
+        getline(tokenizer, p[i].dom.ciudad, '\t');
+        getline(tokenizer, p[i].dom.estado, '\t');
 
+        getline(agenda, s))
+        istringstream tokenizer(s);
+        getline(tokenizer, t, '\t'); // then get the tokens from it
+        getline(tokenizer, p[i].tel.line, '\t');
+        getline(tokenizer, p[i].tel.clave_cd, '\t');
+        getline(tokenizer, p[i].tel.local, '\t');
+        i++;
     }
     agenda.close();
-
 }
 
 int main ()
@@ -386,7 +405,7 @@ int main ()
                 }
 
                 case 'K':{
-                    kargarContactos();
+                    kargarContactos(p);
                     break;
                 }
                 case 'M':
