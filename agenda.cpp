@@ -24,7 +24,7 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
-/*
+
 int stoi(string s){
     int slen = s.length();
     int r =0;
@@ -33,7 +33,7 @@ int stoi(string s){
         r = r + ((s[i]-'0') * pow(10, i));
     }
     return r;
-}*/
+}
 
 
 
@@ -164,7 +164,7 @@ void guardarContactos(Persona* p){
 }
 
 void kargarContactos(Persona* p){
-    
+
     ifstream agenda;
     agenda.open("AGENDA.TDAT");
 
@@ -191,11 +191,10 @@ void kargarContactos(Persona* p){
         getline(tokenizer, p[i].dom.estado, '\t');
 
         getline(agenda, s)
-        istringstream tokenizer(s);
-        getline(tokenizer, t, '\t'); // then get the tokens from it
-        getline(tokenizer, p[i].tel.line, '\t');
-        getline(tokenizer, p[i].tel.clave_cd, '\t');
-        getline(tokenizer, p[i].tel.local, '\t');
+        p[i].tel.line=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].tel.clave_cd=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].tel.local=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+
         i++;
     }
     agenda.close();
