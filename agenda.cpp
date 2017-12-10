@@ -24,7 +24,7 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
-
+/*
 int stoi(string s){
     int slen = s.length();
     int r =0;
@@ -34,7 +34,7 @@ int stoi(string s){
     }
     return r;
 }
-
+*/
 
 
 
@@ -176,31 +176,42 @@ void kargarContactos(Persona* p){
     //lee persona
     while(getline(agenda, s)){
 
-        s = s.substring(s.find("\t"), s.length() - s.find("\t"));
-        p[i].nombre = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].apellido_p = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].apellido_m = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t"), s.length() - s.find("\t"));
+        p[i].nombre = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].apellido_p = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].apellido_m = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         //lee domicilio
-        getline(agenda, s)
-        s = s.substring(s.find("\t"), s.length() - s.find("\t"));
-        p[i].dom.calle=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.numero=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.colonia=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.codigo_postal=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.ciudad=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.estado=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        getline(agenda, s);
+        s = s.substr(s.find("\t"), s.length() - s.find("\t"));
+        p[i].dom.calle=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.numero=stoi(s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 ));
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.colonia=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.codigo_postal=stoi(s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 ));
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.ciudad=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.estado=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
 
-        getline(agenda, s)
-        p[i].tel.line=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].tel.clave_cd=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].tel.local=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        getline(agenda, s);
+        s = s.substr(s.find("\t"), s.length() - s.find("\t"));
+
+        string s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+/*        if(s.compare("C") == 0)
+            p[i].tel.line = Tipo_Linea->Linea_Celular;
+        else if(s.compare("H") == 0) 
+            p[i].tel.line =Tipo_Linea->Linea_Casa; 
+        else 
+            p[i].tel.line =Tipo_Linea->Linea_Trabajo;         
+*/        
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].tel.clave_cd=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].tel.local=s.substr(s.find("\t") + 1, s.length() - s.find("\t") -1 );
 
         i++;
     }
