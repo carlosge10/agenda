@@ -21,6 +21,16 @@ AD[5].colonia
 AD[6].estado
 */
 
+int stoi(string s){
+    int slen = s.length();
+    int r =0;
+    for (int i = 0; i < slen; ++i)
+    {
+        r = r + (s[i] * pow(10, i));
+    }
+    return r;
+}
+
 bool match(std::string word, std::string pattern) {
     for(int i = 0; i < word.length(); i++) {
         if (toupper(word[i]) == toupper(pattern[i]) && i + 1 == pattern.length())
