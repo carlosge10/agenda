@@ -32,6 +32,37 @@ int stoi(string s){
     return r;
 }
 
+void swap(Persona p1, Persona p2){
+    Persona p3;
+    p3=p1;
+    p1=p2;
+    p2=p3;
+}
+
+void sortApellido(Persona *p, int tam){
+    for (int i = 0; i < tam; ++i)
+    {
+            for (int j = 0; j < tam - i - 1; ++j)
+            {
+                if(p[j].apellido_p.compare(p[j+1].apellido_p){
+                    swap(p[j], p[j+1]);
+                }
+            }
+    }
+}
+
+void sortNombre(Persona *p, int tam){
+    for (int i = 0; i < tam; ++i)
+    {
+            for (int j = 0; j < tam - i - 1; ++j)
+            {
+                if(p[j].nombre.compare(p[j+1].nombre){
+                    swap(p[j], p[j+1]);
+                }
+            }
+    }
+}
+
 bool match(std::string word, std::string pattern) {
     for(int i = 0; i < word.length(); i++) {
         if (toupper(word[i]) == toupper(pattern[i]) && i + 1 == pattern.length())
@@ -70,6 +101,7 @@ void menu() {
     cout << "|-D-|: Informacion de contacto " << endl;
     cout << "|-E-|: Eliminar un contacto " << endl;
     cout << "|-I-|: Anadir espacio en la agenda " << endl;
+    cout << "|-O-|: Ordenar contactos " << endl;
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     cout << endl;
@@ -90,6 +122,7 @@ int main ()
     int numero;
     char op;
     p = new Persona[25];
+    bool toggle = true;
 
     menu();
 
@@ -252,7 +285,7 @@ int main ()
                         }
                     }while(!p[opc].isInitialized);
                 break;
-}
+                }
                 case 'E':
                     int pos;
                     cout<<"Dime la posicion del contacto a eliminar: "<<endl;
@@ -292,6 +325,16 @@ int main ()
                     space_in_agenda(&tamano_agenda);
                     cout <<"Hay "<<tamano_agenda<<" contactos activos y la capacidad de contactos en tu agenda es de: " << tam;
                     break;
+                case 'O':
+                {
+                    toggle = !toggle;
+
+                    if(toggle)
+                        sortApellido(p, tam);
+                    else
+                        sortNombre(p, tam);
+                    cout<<"Ordenados"<<endl;
+                }
                 case 'S':
                     cout<<"Gracias por utilizar la agenda de contactos."<< endl;
                     break;
