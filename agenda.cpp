@@ -180,20 +180,51 @@ int main ()
                     int cambio;
                     cout<<"Que numero de contacto quieres cambiar?";
                     cin>>cambio;
+                    cambio--;
+                    print_persona(p[cambio], cambio);
                     string ndato;
                     getline(cin, ndato);
                     cout<<"Nuevo nombre:";
                     getline(cin, ndato);
-                    if(!ndato.equals("")){
+                    if(ndato.compare("")!=0){
                         p[cambio].nombre = ndato;
                     }
                     //repetir para todos los datos
-                    cout<<"Nuevo x:";
+                    cout<<"Nuevo Apellido Paterno:";
                     getline(cin, ndato);
-                    if(!ndato.equals("")){
-                        p[cambio].x = ndato;
+                    if(ndato.compare("")!=0){
+                        p[cambio].apellido_p = ndato;
                     }
-
+                    cout<<"Nuevo Apellido Materno:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].apellido_m = ndato;
+                    }
+                    cout<<"Nueva calle:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].dom.calle = ndato;
+                    }
+                    cout<<"Nuevo interior:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].dom.interior = ndato;
+                    }
+                    cout<<"Nuevo colonia:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].dom.colonia = ndato;
+                    }
+                    cout<<"Nuevo numero:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].dom.numero = stoi(ndato);
+                    }
+                    cout<<"Nueva ciudad:";
+                    getline(cin, ndato);
+                    if(ndato.compare("")!=0){
+                        p[cambio].dom.ciudad = ndato;
+                    }
                     break;
                 }
 
