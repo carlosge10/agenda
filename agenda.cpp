@@ -5,6 +5,7 @@
 #include "types.h"
 #include <conio.h>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 int tam;
@@ -21,7 +22,7 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
-
+/*
 int stoi(string s){
     int slen = s.length();
     int r =0;
@@ -31,7 +32,7 @@ int stoi(string s){
     }
     return r;
 }
-
+*/
 
 
 
@@ -116,7 +117,9 @@ void menu() {
     cout << "|-C-|: Editar contacto " << endl;
     cout << "|-D-|: Informacion de contacto " << endl;
     cout << "|-E-|: Eliminar un contacto " << endl;
+    cout << "|-G-|: Guardar lista a disco " << endl;
     cout << "|-I-|: Anadir espacio en la agenda " << endl;
+    cout << "|-K-|: Kargar list de contactos " << endl;
     cout << "|-O-|: Ordenar contactos " << endl;
     cout << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -129,6 +132,30 @@ void menu() {
     cout << "|-S-|: Finalizar programa " << endl;
     cout << "|-V-|: Mostrar version del programa " << endl;
     cout << "|-?-|: Ayuda " << endl << endl;
+}
+
+void guardarContactos(Persona* p){
+  ofstream agenda;
+  agenda.open ("agenda.txt", ios::trunc);
+
+  for (int i = 0; i < tam; ++i)
+  {
+    agenda<<p[i].nombre<<","<<p[i].apellido_p<<","<<endl;
+  }
+  agenda.close();
+
+}
+
+void kargarContactos(){
+    ifstream agenda;
+    agenda.open("agenda.txt");
+
+    string s;
+    while(getline(cin, s)){
+
+    }
+    agenda.close();
+
 }
 
 int main ()
@@ -328,6 +355,16 @@ int main ()
                     else
                         cout << "El tamano maximo es de 25";
                     break;
+
+                case 'G':{
+                    guardarContactos(p);
+                    break;
+                }
+
+                case 'K':{
+                    kargarContactos();
+                    break;
+                }
                 case 'M':
                     for (int i = 0; i < tam; ++i)
                     {
