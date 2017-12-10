@@ -27,7 +27,7 @@ int stoi(string s){
     int r =0;
     for (int i = 0; i < slen; ++i)
     {
-        r = r + (s[i] * pow(10, i));
+        r = r + ((s[i]-'0') * pow(10, i));
     }
     return r;
 }
@@ -242,6 +242,7 @@ int main ()
                             cout <<"Colonia : " << p[opc].dom.colonia<<endl;
                             cout <<"Estado  : " << p[opc].dom.estado<<endl;
                             cout <<"Interior: " << p[opc].dom.interior<<endl;
+                            cout <<"Numero: " << p[opc].dom.numero<<endl;
                             cout <<"Tipo de linea  : " << p[opc].tel.line<<endl;
                             cout <<"Linea local: " << p[opc].tel.local<<endl;
                             cout <<"Clave de la ciudad: " << p[opc].tel.clave_cd<<endl;
