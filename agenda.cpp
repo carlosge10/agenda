@@ -32,32 +32,37 @@ int stoi(string s){
     return r;
 }
 
-void swap(Persona p1, Persona p2){
-    Persona p3;
-    p3=p1;
-    p1=p2;
-    p2=p3;
-}
+
+
 
 void sortApellido(Persona *p, int tam){
-    for (int i = 0; i < tam; ++i)
+//    cout<<tam<<endl;
+    for (int i = 0; i < tam - 1; ++i)
     {
             for (int j = 0; j < tam - i - 1; ++j)
             {
-                if(p[j].apellido_p.compare(p[j+1].apellido_p){
-                    swap(p[j], p[j+1]);
+                if(p[j].apellido_p.compare(p[j+1].apellido_p) > 0){
+                    Persona p3;
+                    p3=p[j];
+                    p[j] = p[j+1];
+                    p[j+1] = p3;
                 }
             }
     }
 }
 
 void sortNombre(Persona *p, int tam){
+//    cout<<tam<<endl;
     for (int i = 0; i < tam; ++i)
     {
             for (int j = 0; j < tam - i - 1; ++j)
             {
-                if(p[j].nombre.compare(p[j+1].nombre){
-                    swap(p[j], p[j+1]);
+//                cout<<p[j].nombre<<"*"<<p[j+1].nombre<<"*"<<p[j].nombre.compare(p[j+1].nombre)<<endl;
+                if(p[j].nombre.compare(p[j+1].nombre) > 0){
+                    Persona p3;
+                    p3=p[j];
+                    p[j] = p[j+1];
+                    p[j+1] = p3;
                 }
             }
     }
@@ -69,6 +74,17 @@ bool match(std::string word, std::string pattern) {
             return true;
     }
     return false;
+}
+
+int tamAgenda(){
+    int q=0;
+    for(int i = 0; i < tam; i++) {
+        if (p[i].isInitialized) {
+            q++;
+        }
+    }
+    return q;
+
 }
 
 bool space_in_agenda(int *q) {
@@ -328,12 +344,14 @@ int main ()
                 case 'O':
                 {
                     toggle = !toggle;
-
+                    int ta = tamAgenda();
                     if(toggle)
-                        sortApellido(p, tam);
+                        sortApellido(p, ta);
                     else
-                        sortNombre(p, tam);
-                    cout<<"Ordenados"<<endl;
+                        sortNombre(p, ta);
+                    cout<<"Ordenados por " <<((toggle) ? " Apellido paterno" : "Nombre")<<endl;
+                    cout <<"Presiona 'M' para ver el orden";
+                    break;
                 }
                 case 'S':
                     cout<<"Gracias por utilizar la agenda de contactos."<< endl;
