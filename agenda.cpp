@@ -178,17 +178,24 @@ void kargarContactos(Persona* p){
 
         s = s.substring(s.find("\t"), s.length() - s.find("\t"));
         p[i].nombre = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         p[i].apellido_p = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         p[i].apellido_m = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         //lee domicilio
         getline(agenda, s)
         s = s.substring(s.find("\t"), s.length() - s.find("\t"));
         p[i].dom.calle=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         p[i].dom.numero=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
-        p[i].dom.colonia;
-        getline(tokenizer, p[i].dom.codigo_postal, '\t');
-        getline(tokenizer, p[i].dom.ciudad, '\t');
-        getline(tokenizer, p[i].dom.estado, '\t');
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.colonia=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.codigo_postal=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.ciudad=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        s = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.estado=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
 
         getline(agenda, s)
         istringstream tokenizer(s);
