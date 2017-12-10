@@ -24,7 +24,7 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
-
+/*
 int stoi(string s){
     int slen = s.length();
     int r =0;
@@ -33,7 +33,7 @@ int stoi(string s){
         r = r + ((s[i]-'0') * pow(10, i));
     }
     return r;
-}
+}*/
 
 
 
@@ -137,13 +137,8 @@ void menu() {
 }
 
 void guardarContactos(Persona* p){
-<<<<<<< HEAD
-  ofstream agenda;
-  agenda.open ("AGENDA.TDAT", ios::trunc);
-=======
   ofstream AGENDA;
-  AGENDA.open ("AGENDA.txt", ios::trunc);
->>>>>>> 073714b34ba9712b3f98fe677db35cb155e03b4e
+  AGENDA.open ("AGENDA.TDAT", ios::trunc);
 
   string s = "CEDI TXT DATA FORMAT v0.1";
   int slen = s.length();
@@ -168,15 +163,10 @@ void guardarContactos(Persona* p){
 
 }
 
-<<<<<<< HEAD
 void kargarContactos(Persona* p){
+    
     ifstream agenda;
     agenda.open("AGENDA.TDAT");
-=======
-void kargarContactos(){
-    ifstream AGENDA;
-    AGENDA.open("AGENDA.txt");
->>>>>>> 073714b34ba9712b3f98fe677db35cb155e03b4e
 
     string s;
     string t;
@@ -185,24 +175,22 @@ void kargarContactos(){
     int i=0;
     //lee persona
     while(getline(agenda, s)){
-        istringstream tokenizer(s);
-        getline(tokenizer, t, '\t'); // then get the tokens from it
-        getline(tokenizer, p[i].nombre, '\t');
-        getline(tokenizer, p[i].apellido_p, '\t');
-        getline(tokenizer, p[i].apellido_m, '\t');
 
+        s = s.substring(s.find("\t"), s.length() - s.find("\t"));
+        p[i].nombre = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].apellido_p = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].apellido_m = s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
         //lee domicilio
-        getline(agenda, s))
-        istringstream tokenizer(s);
-        getline(tokenizer, t, '\t'); // then get the tokens from it
-        getline(tokenizer, p[i].dom.calle, '\t');
-        getline(tokenizer, p[i].dom.numero, '\t');
-        getline(tokenizer, p[i].dom.colonia, '\t');
+        getline(agenda, s)
+        s = s.substring(s.find("\t"), s.length() - s.find("\t"));
+        p[i].dom.calle=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.numero=s.substring(s.find("\t") + 1, s.length() - s.find("\t") -1 );
+        p[i].dom.colonia;
         getline(tokenizer, p[i].dom.codigo_postal, '\t');
         getline(tokenizer, p[i].dom.ciudad, '\t');
         getline(tokenizer, p[i].dom.estado, '\t');
 
-        getline(agenda, s))
+        getline(agenda, s)
         istringstream tokenizer(s);
         getline(tokenizer, t, '\t'); // then get the tokens from it
         getline(tokenizer, p[i].tel.line, '\t');
@@ -210,12 +198,8 @@ void kargarContactos(){
         getline(tokenizer, p[i].tel.local, '\t');
         i++;
     }
-<<<<<<< HEAD
     agenda.close();
-=======
-    AGENDA.close();
 
->>>>>>> 073714b34ba9712b3f98fe677db35cb155e03b4e
 }
 
 int main ()
