@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "types.h"
+#include <conio.h>
 
 using namespace std;
 int tam;
@@ -42,9 +43,7 @@ bool space_in_agenda(int *q) {
 
 void print_persona(Persona p, int i) {
     cout<<"Posicion: "<<(i+1)<<endl;
-    cout<<"Nombre  : "<<p.nombre<<endl;
-    cout<<"APaterno: "<<p.apellido_p<<endl;
-    cout<<"AMaterno: "<<p.apellido_m[0]<<endl;
+    cout<<p.nombre<<" "<<p.apellido_p<<" "<<p.apellido_m[0]<<endl;
 }
 
 void menu() {
@@ -100,8 +99,9 @@ int main ()
                     // Hay espacio para agregar persona
                     Persona contacto;
                     cout << "-----Ingrese los datos requeridos para agregar un contacto: ------" << endl;
+                    getline(cin,contacto.nombre);
                     cout << "Nombre(s): ";
-                    cin >> contacto.nombre;
+                    getline(cin,contacto.nombre);
                     cout << "Apellido Paterno: ";
                     cin >> contacto.apellido_p;
                     cout << "Apellido Materno: ";
@@ -154,6 +154,7 @@ int main ()
                         }
                     break;}
                 case 'B': {
+                    cout<<"Que quieres buscar";
                     std::string busqueda;
                     cin>>busqueda;
                     for (int i = 0; i < tam; ++i)

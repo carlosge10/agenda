@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="agenda.cpp" />
+		<Unit filename="types.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1512856709 source:c:\users\edzzi\documents\proyecto\agenda.cpp
+	<iostream>
+	<string>
+	"types.h"
+	<conio.h>
+
+1512852783 c:\users\edzzi\documents\proyecto\types.h
+	<string>
+
