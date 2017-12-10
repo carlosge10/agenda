@@ -24,7 +24,7 @@ AD[4].codigo_postal
 AD[5].colonia
 AD[6].estado
 */
-/*
+
 int stoi(string s){
     int slen = s.length();
     int r =0;
@@ -34,7 +34,7 @@ int stoi(string s){
     }
     return r;
 }
-*/
+
 
 
 
@@ -137,34 +137,35 @@ void menu() {
 }
 
 void guardarContactos(Persona* p){
-  ofstream agenda;
-  agenda.open ("agenda.txt", ios::trunc);
+  ofstream AGENDA;
+  AGENDA.open ("AGENDA.txt", ios::trunc);
 
   string s = "CEDI TXT DATA FORMAT v0.1";
   int slen = s.length();
   for (int i = 0; i < 32; ++i)
   {
     if(i<slen){
-        agenda<<s[i];
+        AGENDA<<s[i];
     }
     else{
-        agenda<<" ";
+        AGENDA<<" ";
     }
   }
-  agenda<<endl;
+  AGENDA<<endl;
 
   for (int i = 0; i < tam; ++i)
   {
-    agenda<<"PERSONA:\t"<<p[i].nombre<<"\t"<<p[i].apellido_p<<endl;
-    agenda<<"TELEFONO:\t";
+    AGENDA<<"PERSONA:\t"<<p[i].nombre<<"\t"<<p[i].apellido_p<<endl;
+    AGENDA<<"DOMICILIO:\t"<<p[i].dom.calle<<"\t"<<p[i].dom.numero<<"\t"<<p[i].dom.colonia<<"\t"<<p[i].dom.codigo_postal<<"\t"<<p[i].dom.ciudad<<" "<<p[i].dom.estado<<endl;
+    AGENDA<<"TELEFONO:\t"<<p[i].tel.line<<"\t"<<p[i].tel.clave_cd<<"\t"<<p[i].tel.local<<endl;
   }
-  agenda.close();
+  AGENDA.close();
 
 }
 
 void kargarContactos(){
-    ifstream agenda;
-    agenda.open("agenda.txt");
+    ifstream AGENDA;
+    AGENDA.open("AGENDA.txt");
 
     string s;
     while(getline(cin, s)){
@@ -178,7 +179,7 @@ void kargarContactos(){
         }
 
     }
-    agenda.close();
+    AGENDA.close();
 
 }
 
@@ -248,10 +249,10 @@ int main ()
                         cin >> linea;
                         linea= toupper(linea);
                         if (linea == 'C' || linea == 'H' || linea == 'W'){
-                            cout << "Linea local: " << endl;
-                            cin >> contacto.tel.local;
                             cout << "Clave de la ciudad: " <<endl;
                             cin >> contacto.tel.clave_cd;
+                            cout << "Numero: " << endl;
+                            cin >> contacto.tel.local;
                             cout << "Numero guardado"<<endl;
                         }
                         else
